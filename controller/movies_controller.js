@@ -80,9 +80,10 @@
 const express = require('express')
 const router = express.Router()
 const pool = require('../config/queries')
+const authenticationTokenMiddleware = require('../middleware/auth')
 
 // GET Databases Routes
-router.get('/', (req, res) => {
+router.get('/', authenticationTokenMiddleware, (req, res) => {
     // (?page=..&size=..)
     pool.query(`SELECT * FROM movies ORDER BY id ASC LIMIT $2 OFFSET (($1 - 1) * $2)`, [req.query.page, req.query.size], (error, results) => {
         if (error) {
@@ -92,7 +93,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticationTokenMiddleware, (req, res) => {
     pool.query(`SELECT * FROM movies WHERE id = ${req.params.id}`, (error, results) => {
         if (error) {
             throw error
@@ -103,7 +104,7 @@ router.get('/:id', (req, res) => {
 
 
 // POST Databases Routes
-router.post('/', (req, res) => {
+router.post('/', authenticationTokenMiddleware, (req, res) => {
     pool.query(`INSERT INTO movies ("id", "title", "genres", "year") VALUES ($1, $2, $3, $4);`, [req.body.id, req.body.title, req.body.genres, req.body.year], (error, results) => {
         if (error) {
             throw error
@@ -116,7 +117,7 @@ router.post('/', (req, res) => {
 
 
 // PUT Databases Routes
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticationTokenMiddleware, (req, res) => {
     pool.query(`UPDATE movies SET title = $1, genres = $2, year = $3 WHERE id = ${req.params.id}`, [req.body.title, req.body.genres, req.body.year], (error, results) => {
         if (error) {
             throw error
@@ -128,7 +129,7 @@ router.put('/:id', (req, res) => {
 })
 
 // DELETE Databases Routes
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticationTokenMiddleware, (req, res) => {
     pool.query(`DELETE FROM movies WHERE ID = ${req.params.id}`, (error, results) => {
         if (error) {
             throw error
