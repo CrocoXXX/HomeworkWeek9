@@ -2,12 +2,13 @@
  * @swagger
  * components:
  *   schemas:
- *     Movies:
+ *     Movie:
  *       type: object
  *       required:
+ *         - id
  *         - title
- *         - author
- *         - finished
+ *         - genres
+ *         - year
  *       properties:
  *         id:
  *           type: integer
@@ -33,6 +34,28 @@
  * tags:
  *   name: Movies
  *   description: The movies managing API
+ *  
+ * /movies/{id}:
+ *   get:
+ *     summary: Get the movie by id
+ *     tags: [Movies]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The book id
+ *     responses:
+ *       200:
+ *         description: The movie response by id.
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '$/components/schemas/Movies'
+ *       404:
+ *         description: The movie was not found.
+ *  
  * /movies:
  *   post:
  *     summary: Create a new movie
@@ -42,37 +65,16 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Book'
+ *             $ref: '#/components/schemas/Movie'
  *     responses:
  *       200:
  *         description: The created movie.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '$/components/schemas/Book'
+ *               $ref: '$/components/schemas/Movie'
  *       500:
  *         description: Some server error.
- * 
- * /movies:
- *   post:
- *     summary: Create a new movie
- *     tags: [Movies]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Book'
- *     responses:
- *       200:
- *         description: The created movie.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '$/components/schemas/Book'
- *       500:
- *         description: Some server error.
- * 
  */
 
 const express = require('express')
