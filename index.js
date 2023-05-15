@@ -17,6 +17,21 @@ const options = {
             version: '0.1.0',
             description: 'This is a CRUD API application made with Express and documented with Swagger',
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    in: 'hedaer',
+                    name: 'Authorization',
+                    description: 'Bearer token to access these api endpoints',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                }
+            }
+        },
+        security: [{
+            bearerAuth: [],
+        }],
         servers: [{
             url: 'http://localhost:8080',
         }],

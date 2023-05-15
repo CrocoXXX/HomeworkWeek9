@@ -24,8 +24,8 @@
  *           description: The year of your movie.
  *       example:
  *         id: 1,
- *         title: Reckless
- *         genres: Comedy|Drama|Romance
+ *         title: Reckless,
+ *         genres: Comedy|Drama|Romance,
  *         year: 2001,
  */
 
@@ -40,14 +40,14 @@
  *     tags: [Movies]
  *     responses:
  *       200:
- *         description: The movie response.
+ *         description: Get All The Movie.
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '$/components/schemas/Movies'
  *       404:
  *         description: The movie was not found.
- * /movies:
+ * /movies/post:
  *   post:
  *     summary: Create a new movie.
  *     tags: [Movies]

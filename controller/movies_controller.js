@@ -25,7 +25,7 @@ router.get('/:id', authenticationTokenMiddleware, (req, res) => {
 
 
 // POST Databases Routes
-router.post('/', authenticationTokenMiddleware, (req, res) => {
+router.post('/post', authenticationTokenMiddleware, (req, res) => {
     pool.query(`INSERT INTO movies ("id", "title", "genres", "year") VALUES ($1, $2, $3, $4);`, [req.body.id, req.body.title, req.body.genres, req.body.year], (error, results) => {
         if (error) {
             throw error
