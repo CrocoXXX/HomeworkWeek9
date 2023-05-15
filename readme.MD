@@ -12,4 +12,4 @@ Homework Week 9 in Rakamin Academy about Restfull API and Middleware Auth
 6. Run "npm run start"
 7. Check Restfull API in your Potsman App
 8. Check Swagger in your localhost "example: http://localhost:8080/api-docs/"
-9.  And check the image screenshot file on the drive "https://drive.google.com/drive/folders/1hdWcpOFskWoGbv6vgQgrMjVyiYj2SpSq?usp=share_link"
+9.  And check the image screenshot file on the drive "https://drive.google.com/drive/folders/1hdWcpOFskWoGbv6vgQgrMjVyiYj2SpSq?usp=share_link" or check in the folder screenshot in Projek

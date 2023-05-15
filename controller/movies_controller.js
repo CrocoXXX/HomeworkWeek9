@@ -6,7 +6,7 @@ const authenticationTokenMiddleware = require('../middleware/auth')
 // GET Databases Routes
 router.get('/', authenticationTokenMiddleware, (req, res) => {
     // (?page=..&size=..)
-    pool.query(`SELECT * FROM movies ORDER BY id ASC`, (error, results) => {
+    pool.query(`SELECT * FROM movies ORDER BY id ASC LIMIT $2 OFFSET (($1 - 1) * $2)`, [req.query.page, req.query.size], (error, results) => {
         if (error) {
             throw error
         }

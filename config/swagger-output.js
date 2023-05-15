@@ -5,35 +5,31 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:8080",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
-  "securityDefinitions": {
-    "bearerAuth": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
-    }
-  },
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/movies/": {
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "authorization",
+          "in": "header",
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "OK"
@@ -47,12 +43,16 @@
     "/movies/{id}": {
       "get": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -66,11 +66,15 @@
       },
       "put": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           },
           {
@@ -103,12 +107,16 @@
       },
       "delete": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer"
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -124,7 +132,11 @@
     "/movies/post": {
       "post": {
         "description": "",
-        "parameters": [
+        "parameters": [{
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -160,14 +172,12 @@
     "/movies/{name}": {
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "OK"
@@ -178,8 +188,7 @@
     "/users/": {
       "get": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "page",
             "in": "query",
             "type": "string"
@@ -187,6 +196,11 @@
           {
             "name": "size",
             "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -201,7 +215,11 @@
       },
       "post": {
         "description": "",
-        "parameters": [
+        "parameters": [{
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -240,11 +258,15 @@
     "/users/{id}": {
       "get": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -259,11 +281,15 @@
       },
       "put": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           },
           {
@@ -276,6 +302,9 @@
                   "example": "any"
                 },
                 "gender": {
+                  "example": "any"
+                },
+                "password": {
                   "example": "any"
                 },
                 "role": {
@@ -296,11 +325,15 @@
       },
       "delete": {
         "description": "",
-        "parameters": [
-          {
+        "parameters": [{
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],
@@ -317,32 +350,30 @@
     "/auth/register": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "gender": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                },
-                "role": {
-                  "example": "any"
-                }
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "example": "any"
+              },
+              "email": {
+                "example": "any"
+              },
+              "gender": {
+                "example": "any"
+              },
+              "password": {
+                "example": "any"
+              },
+              "role": {
+                "example": "any"
               }
             }
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "OK"
@@ -353,23 +384,21 @@
     "/auth/login": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "example": "any"
+              },
+              "password": {
+                "example": "any"
               }
             }
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "OK"
@@ -467,10 +496,5 @@
         }
       }
     }
-  },
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ]
+  }
 }
