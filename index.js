@@ -2,6 +2,7 @@
 const express = require('express')
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const dotenv = require('dotenv')
@@ -35,6 +36,7 @@ const authentication = require('./controller/authentication_controller')
 
 // Parse requests of content-type - application/json
 app.use(express.json())
+app.use(morgan('combined'))
 app.use(cors())
 // app.use(bodyParser.json())
 
