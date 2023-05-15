@@ -9,38 +9,40 @@ const dotenv = require('dotenv')
 const app = express()
 
 // Swagger
-const options = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'Express API with Swagger',
-            version: '0.1.0',
-            description: 'This is a CRUD API application made with Express and documented with Swagger',
-        },
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: 'http',
-                    in: 'hedaer',
-                    name: 'Authorization',
-                    description: 'Bearer token to access these api endpoints',
-                    scheme: 'bearer',
-                    bearerFormat: 'JWT',
-                }
-            }
-        },
-        security: [{
-            bearerAuth: [],
-        }],
-        servers: [{
-            url: 'http://localhost:8080',
-        }],
-    },
-    apis: ['./document/*']
-}
+// const options = {
+//     definition: {
+//         openapi: '3.0.0',
+//         info: {
+//             title: 'Express API with Swagger',
+//             version: '0.1.0',
+//             description: 'This is a CRUD API application made with Express and documented with Swagger',
+//         },
+//         components: {
+//             securitySchemes: {
+//                 bearerAuth: {
+//                     type: 'http',
+//                     in: 'hedaer',
+//                     name: 'Authorization',
+//                     description: 'Bearer token to access these api endpoints',
+//                     scheme: 'bearer',
+//                     bearerFormat: 'JWT',
+//                 }
+//             }
+//         },
+//         security: [{
+//             bearerAuth: [],
+//         }],
+//         servers: [{
+//             url: 'http://localhost:8080',
+//         }],
+//     },
+//     apis: ['./document/*']
+// }
 
-const specs = swaggerJsdoc(options)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+const options = require('./config/swagger')
+const swaggerDocument = require('./config/swagger-output.json');
+// const specs = swaggerJsdoc(options)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
     explorer: true
 }))
 
@@ -64,9 +66,9 @@ app.use(express.urlencoded({
 // }))
 
 // Simple router
-app.get('/', (req, res) => {
-    res.send('Welcome to Homework 9 Lawrence Adi Noman')
-})
+// app.get('/', (req, res) => {
+//     res.send('Welcome to Homework 9 Lawrence Adi Noman')
+// })
 
 // Should be in the same directory
 app.use('/movies', movies)
