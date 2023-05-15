@@ -19,13 +19,13 @@ const options = {
         },
         servers: [{
             url: 'http://localhost:8080',
-        }, ],
+        }],
     },
-    apis: ['./controller/*']
+    apis: ['./document/*']
 }
 
 const specs = swaggerJsdoc(options)
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(specs, {
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
     explorer: true
 }))
 
